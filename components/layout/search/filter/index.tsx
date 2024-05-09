@@ -1,7 +1,13 @@
-import { SortFilterItem } from 'lib/constants';
 import { Suspense } from 'react';
 import FilterItemDropdown from './dropdown';
 import { FilterItem } from './item';
+
+export type SortFilterItem = {
+  title: string;
+  slug: string | null;
+  sortKey: 'RELEVANCE' | 'BEST_SELLING' | 'CREATED_AT' | 'PRICE';
+  reverse: boolean;
+};
 
 export type ListItem = SortFilterItem | PathFilterItem;
 export type PathFilterItem = { title: string; path: string };
