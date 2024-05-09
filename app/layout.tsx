@@ -3,20 +3,25 @@ import { GeistSans } from 'geist/font/sans';
 import { ReactNode } from 'react';
 import './globals.css';
 
-const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
-  ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-  : 'http://localhost:3000';
+import type { Metadata, Viewport } from 'next';
 
-export const metadata = {
-  metadataBase: new URL(baseUrl),
+const APP_NAME = 'Food App';
+const APP_DEFAULT_TITLE = 'Food App';
+const APP_TITLE_TEMPLATE = '%s';
+const APP_DESCRIPTION = 'Food ordering app';
+
+export const metadata: Metadata = {
+  applicationName: APP_NAME,
   title: {
-    default: 'Food App',
-    template: `%s`
+    default: APP_DEFAULT_TITLE,
+    template: APP_TITLE_TEMPLATE
   },
-  robots: {
-    follow: true,
-    index: true
-  }
+  description: APP_DESCRIPTION,
+  manifest: '/manifest.json'
+};
+
+export const viewport: Viewport = {
+  themeColor: '#FFFFFF'
 };
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
