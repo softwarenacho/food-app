@@ -2,14 +2,15 @@ import { Suspense } from 'react';
 import FilterItemDropdown from './dropdown';
 import { FilterItem } from './item';
 
-export type SortFilterItem = {
+export type FilterItem = {
   title: string;
   slug: string | null;
-  sortKey: 'RELEVANCE' | 'BEST_SELLING' | 'CREATED_AT' | 'PRICE';
+  // sortKey: 'RELEVANCE' | 'BEST_SELLING' | 'CREATED_AT' | 'PRICE';
+  sortKey: string;
   reverse: boolean;
 };
 
-export type ListItem = SortFilterItem | PathFilterItem;
+export type ListItem = FilterItem | PathFilterItem;
 export type PathFilterItem = { title: string; path: string };
 
 function FilterItemList({ list }: { list: ListItem[] }) {

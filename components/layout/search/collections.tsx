@@ -4,7 +4,15 @@ import { Suspense } from 'react';
 import FilterList from './filter';
 
 async function CollectionList() {
-  const collections = await getCollections();
+  // const collections = await getCollections();
+  const collections = [
+    {
+      title: '',
+      slug: '',
+      sortKey: 'RELEVANCE',
+      reverse: false
+    }
+  ];
   return <FilterList list={collections} title="Collections" />;
 }
 

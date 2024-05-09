@@ -11,3 +11,6 @@ export default async function Cart() {
 
   return <CartModal cart={cart} />;
 }
+function getCart(cartId: string): any {
+  return { id: cartId };
+}

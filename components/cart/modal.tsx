@@ -3,6 +3,7 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 import Price from 'components/price';
+import { Cart } from 'components/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, useEffect, useRef, useState } from 'react';
@@ -33,6 +34,10 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
       quantityRef.current = cart?.totalQuantity;
     }
   }, [isOpen, cart?.totalQuantity, quantityRef]);
+
+  function createUrl(arg0: string, arg1: URLSearchParams) {
+    return '/' + arg0 + '/' + arg1;
+  }
 
   return (
     <>
@@ -81,11 +86,11 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                     {cart.lines.map((item, i) => {
                       const merchandiseSearchParams = {} as MerchandiseSearchParams;
 
-                      item.merchandise.selectedOptions.forEach(({ name, value }) => {
-                        if (value !== DEFAULT_OPTION) {
-                          merchandiseSearchParams[name.toLowerCase()] = value;
-                        }
-                      });
+                      // item.merchandise.selectedOptions.forEach(({ name, value }) => {
+                      //   if (value !== DEFAULT_OPTION) {
+                      //     merchandiseSearchParams[name.toLowerCase()] = value;
+                      //   }
+                      // });
 
                       const merchandiseUrl = createUrl(
                         `/product/${item.merchandise.product.handle}`,
@@ -112,10 +117,10 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                                   width={64}
                                   height={64}
                                   alt={
-                                    item.merchandise.product.featuredImage.altText ||
+                                    item.merchandise.product.featuredImage?.altText ||
                                     item.merchandise.product.title
                                   }
-                                  src={item.merchandise.product.featuredImage.url}
+                                  src={item.merchandise.product.featuredImage?.url as string}
                                 />
                               </div>
 
@@ -123,7 +128,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                                 <span className="leading-tight">
                                   {item.merchandise.product.title}
                                 </span>
-                                {item.merchandise.title !== DEFAULT_OPTION ? (
+                                {item.merchandise.title !== 'DEFAULT_OPTION' ? (
                                   <p className="text-sm text-neutral-500 dark:text-neutral-400">
                                     {item.merchandise.title}
                                   </p>

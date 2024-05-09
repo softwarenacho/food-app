@@ -54,3 +54,6 @@ export function SearchSkeleton() {
     </form>
   );
 }
+function createUrl(arg0: string, newParams: URLSearchParams): string {
+  return '/' + arg0 + '/' + newParams;
+}

@@ -44,3 +44,36 @@ export type ProductVariant = {
   availableForSale: boolean;
   selectedOptions: ProductOption[];
 };
+
+export type Cart = {
+  lines: CartItem[];
+  totalQuantity: number;
+  checkoutUrl: string;
+  cost: {
+    totalAmount: {
+      amount: string;
+      currencyCode: string;
+    };
+    totalTaxAmount: {
+      amount: string;
+      currencyCode: string;
+    };
+  };
+};
+
+export type CartItem = {
+  id: string;
+  quantity: number;
+  cost: {
+    totalAmount: {
+      amount: string;
+      currencyCode: string;
+    };
+  };
+  merchandise: {
+    title: string;
+    id: string;
+    selectedOptions: { name: string; value: string }[];
+    product: Product;
+  };
+};

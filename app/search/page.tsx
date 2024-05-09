@@ -1,3 +1,4 @@
+import { getCollectionProducts } from 'app/api/products';
 import Grid from 'components/grid';
 import ProductGridItems from 'components/layout/product-grid-items';
 // import { defaultSort, sorting } from './utils';
@@ -18,41 +19,7 @@ export default async function SearchPage({
 
   // const products = await getProducts({ sortKey, reverse, query: searchValue });
 
-  const products = [
-    {
-      handle: '123',
-      featuredImage: {
-        url: '',
-        width: '100',
-        height: '100',
-        altText: ''
-      },
-      tags: [],
-      seo: {
-        description: '',
-        title: ''
-      },
-      description: '',
-      title: '',
-      availableForSale: true,
-      priceRange: {
-        minVariantPrice: {
-          currencyCode: 'MXN',
-          amount: '3'
-        },
-        maxVariantPrice: {
-          currencyCode: 'MXN',
-          amount: '5'
-        }
-      },
-      images: [
-        {
-          url: '',
-          altText: 'ALT'
-        }
-      ]
-    }
-  ];
+  const products = getCollectionProducts();
 
   const resultsText = products.length > 1 ? 'results' : 'result';
 

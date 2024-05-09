@@ -1,6 +1,5 @@
 'use server';
 
-import { revalidateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 
 export async function addItem(prevState: any, selectedVariantId: string | undefined) {
@@ -23,7 +22,7 @@ export async function addItem(prevState: any, selectedVariantId: string | undefi
 
   try {
     await addToCart(cartId, [{ merchandiseId: selectedVariantId, quantity: 1 }]);
-    revalidateTag(TAGS.cart);
+    // revalidateTag(TAGS.cart);
   } catch (e) {
     return 'Error adding item to cart';
   }
@@ -38,7 +37,7 @@ export async function removeItem(prevState: any, lineId: string) {
 
   try {
     await removeFromCart(cartId, [lineId]);
-    revalidateTag(TAGS.cart);
+    // revalidateTag(TAGS.cart);
   } catch (e) {
     return 'Error removing item from cart';
   }
@@ -63,7 +62,7 @@ export async function updateItemQuantity(
   try {
     if (quantity === 0) {
       await removeFromCart(cartId, [lineId]);
-      revalidateTag(TAGS.cart);
+      // revalidateTag(TAGS.cart);
       return;
     }
 
@@ -74,8 +73,30 @@ export async function updateItemQuantity(
         quantity
       }
     ]);
-    revalidateTag(TAGS.cart);
+    // revalidateTag(TAGS.cart);
   } catch (e) {
     return 'Error updating item quantity';
   }
+}
+function getCart(cartId: string) {
+  return { id: cartId };
+}
+
+function createCart() {
+  return { id: '1' };
+}
+
+function addToCart(cartId: string, arg1: { merchandiseId: string; quantity: number }[]) {
+  return { id: cartId, arg: arg1 };
+}
+
+function removeFromCart(cartId: string, arg1: string[]) {
+  return { id: cartId, arg: arg1 };
+}
+
+function updateCart(
+  cartId: string,
+  arg1: { id: string; merchandiseId: string; quantity: number }[]
+) {
+  return { id: cartId, arg: arg1 };
 }
