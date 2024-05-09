@@ -1,13 +1,8 @@
 'use client';
 
 import clsx from 'clsx';
+import { Combination, ProductOption, ProductVariant } from 'components/types';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-
-type Combination = {
-  id: string;
-  availableForSale: boolean;
-  [key: string]: string | boolean; // ie. { color: 'Red', size: 'Large', ... }
-};
 
 export function VariantSelector({
   options,
@@ -20,7 +15,7 @@ export function VariantSelector({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const hasNoOptionsOrJustOneOption =
-    !options.length || (options.length === 1 && options[0]?.values.length === 1);
+    !options.length || (options.length === 1 && options[0] && options[0].values.length === 1);
 
   if (hasNoOptionsOrJustOneOption) {
     return null;
@@ -35,6 +30,10 @@ export function VariantSelector({
       {}
     )
   }));
+
+  function createUrl(pathname: string, optionSearchParams: URLSearchParams) {
+    return '/' + pathname + '/' + optionSearchParams;
+  }
 
   return options.map((option) => (
     <dl className="mb-8" key={option.id}>

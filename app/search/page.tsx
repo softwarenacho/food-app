@@ -1,5 +1,6 @@
 import Grid from 'components/grid';
 import ProductGridItems from 'components/layout/product-grid-items';
+// import { defaultSort, sorting } from './utils';
 
 export const metadata = {
   title: 'Search',
@@ -11,10 +12,48 @@ export default async function SearchPage({
 }: {
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
-  const { sort, q: searchValue } = searchParams as { [key: string]: string };
-  const { sortKey, reverse } = sorting.find((item) => item.slug === sort) || defaultSort;
+  const { q: searchValue } = searchParams as { [key: string]: string };
+  // const { sort, q: searchValue } = searchParams as { [key: string]: string };
+  // const { sortKey, reverse } = sorting.find((item) => item.slug === sort) || defaultSort;
 
-  const products = await getProducts({ sortKey, reverse, query: searchValue });
+  // const products = await getProducts({ sortKey, reverse, query: searchValue });
+
+  const products = [
+    {
+      handle: '123',
+      featuredImage: {
+        url: '',
+        width: '100',
+        height: '100',
+        altText: ''
+      },
+      tags: [],
+      seo: {
+        description: '',
+        title: ''
+      },
+      description: '',
+      title: '',
+      availableForSale: true,
+      priceRange: {
+        minVariantPrice: {
+          currencyCode: 'MXN',
+          amount: '3'
+        },
+        maxVariantPrice: {
+          currencyCode: 'MXN',
+          amount: '5'
+        }
+      },
+      images: [
+        {
+          url: '',
+          altText: 'ALT'
+        }
+      ]
+    }
+  ];
+
   const resultsText = products.length > 1 ? 'results' : 'result';
 
   return (

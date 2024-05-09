@@ -96,3 +96,6 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
     </>
   );
 }
+function createUrl(pathname: string, nextSearchParams: URLSearchParams) {
+  return '/' + pathname + '/' + nextSearchParams;
+}
